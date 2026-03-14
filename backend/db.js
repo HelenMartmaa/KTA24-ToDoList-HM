@@ -1,6 +1,6 @@
-const sqlite3 = require('sqlite3').verbose();  // Importige sqlite3 moodul
+const sqlite3 = require('sqlite3').verbose();
 
-// Loome ühenduse andmebaasiga
+//Ühendus andmebaasiga
 const db = new sqlite3.Database('./todo.db', (err) => {
     if (err) {
         console.error('Error opening database', err.message);
@@ -9,10 +9,9 @@ const db = new sqlite3.Database('./todo.db', (err) => {
     }
 });
 
-// Ekspordime ühenduse, et seda saaksime kasutada teistes failides
 module.exports = db;
 
-// Create (Lisa uus ülesanne)
+//Add (Lisa uus ülesanne)
 const addTodo = (task, callback) => {
     const sql = 'INSERT INTO todos (task, done) VALUES (?, ?)';
     db.run(sql, [task, false], function(err) {
@@ -25,7 +24,7 @@ const addTodo = (task, callback) => {
     });
 };
 
-// Read (Loe kõik ülesanded)
+//Read (Loe kõik ülesanded)
 const getAllTodos = (callback) => {
     const sql = 'SELECT * FROM todos';
     db.all(sql, [], (err, rows) => {
@@ -38,7 +37,7 @@ const getAllTodos = (callback) => {
     });
 };
 
-// Update (Uuenda ülesande staatust)
+//Update (Uuenda ülesande staatust)
 const updateTodo = (id, done, callback) => {
     const sql = 'UPDATE todos SET done = ? WHERE id = ?';
     db.run(sql, [done, id], function(err) {
@@ -51,7 +50,7 @@ const updateTodo = (id, done, callback) => {
     });
 };
 
-// Delete (Kustuta ülesanne)
+//Delete (Kustuta ülesanne)
 const deleteTodo = (id, callback) => {
     const sql = 'DELETE FROM todos WHERE id = ?';
     db.run(sql, [id], function(err) {
@@ -64,7 +63,7 @@ const deleteTodo = (id, callback) => {
     });
 };
 
-// Ekspordime need funktsioonid, et neid saaks kasutada mujal
+//Eksport funktsioonidele, et neid saaks kasutada mujal
 module.exports = {
     addTodo,
     getAllTodos,
