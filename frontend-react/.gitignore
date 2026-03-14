@@ -1,0 +1,14 @@
+# Node.js / React ignoreerimine
+node_modules/
+build/
+dist/
+.env
+
+# Logi failid
+*.log
+
+# Mac OSi failid
+.DS_Store
+
+# Andmebaas (tekib automaatselt)
+*.db
